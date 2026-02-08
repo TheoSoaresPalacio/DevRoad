@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operadores e Lógica | The DevRoad</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="topic-page">
+    <aside class="topic-sidebar">
+        <a href="index.html" class="back-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Voltar ao Início
+        </a>
+        <h2>Neste capítulo</h2>
+        <div class="sidebar-item active" onclick="scrollToSection('aritmeticos')">Aritméticos</div>
+        <div class="sidebar-item" onclick="scrollToSection('logicos')">Lógicos e Relacionais</div>
+        <div class="sidebar-item" onclick="scrollToSection('precedencia')">Precedência</div>
+        <div class="sidebar-item" onclick="scrollToSection('bitwise')">O Poder do Bitwise</div>
+    </aside>
+
+    <main class="topic-main">
+        <article class="lesson-content">
+            <section id="aritmeticos">
+                <h1>Operadores e Lógica</h1>
+                <p>Os operadores são os motores do seu código. Eles pegam as variáveis (os dados) e realizam
+                    transformações neles.</p>
+
+                <h2>Operadores Aritméticos</h2>
+                <ul>
+                    <li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>: As quatro operações básicas.
+                    </li>
+                    <li><code>%</code> (Módulo): Retorna o resto da divisão. Essencial para descobrir se um número é par
+                        ou ímpar (<code>x % 2 == 0</code>).</li>
+                </ul>
+                <h3>Incremento e Decremento</h3>
+                <pre><code>int x = 10;
+x++; // vira 11
+x--; // volta para 10</code></pre>
+            </section>
+
+            <section id="logicos">
+                <h2>Comparações e Decisões Lógicas</h2>
+                <p>Aqui é onde seu programa começa a "pensar".</p>
+                <h3>Relacionais (O resultado é sempre boolean)</h3>
+                <ul>
+                    <li><code>==</code>: Igual a.</li>
+                    <li><code>!</code><code>=</code> Diferente de.</li>
+                    <li><code>></code>, <code><</code>, <code>></code><code>=</code>, <code><</code><code>=</code>:
+                        Comparações de magnitude.</li>
+                </ul>
+                <h3>Lógicos (Combinando condições)</h3>
+                <ul>
+                    <li><code>&&</code> (E): Retorna true só se AMBOS forem true.</li>
+                    <li><code>||</code> (OU): Retorna true se PELO MENOS UM for true.</li>
+                    <li><code>!</code> (NÃO): Inverte o valor (true vira false).</li>
+                </ul>
+            </section>
+
+            <section id="precedencia">
+                <h2>Precedência: Quem manda em quem?</h2>
+                <p>Assim como na matemática, o Java resolve as coisas em uma ordem específica. Se você não cuidar, o
+                    resultado pode sair errado.</p>
+                <div class="callout">
+                    <h4>A Ordem Real</h4>
+                    <ol>
+                        <li>Parênteses <code>()</code>.</li>
+                        <li>Multiplicação e Divisão <code>* / %</code>.</li>
+                        <li>Soma e Subtração <code>+ -</code>.</li>
+                        <li>Relacionais e Lógicos.</li>
+                    </ol>
+                    <p><strong>Dica:</strong> Na dúvida, sempre use parênteses para deixar sua intenção clara.</p>
+                </div>
+            </section>
+
+            <section id="bitwise">
+                <h2>Bitwise: Lógica no Nível dos Átomos</h2>
+                <p>Os operadores bitwise manipulam os bits (0 e 1) individuais dos números. Isso é usado em
+                    criptografia, compressão e sistemas de alta performance.</p>
+                <ul>
+                    <li><code>&</code> (Bitwise AND).</li>
+                    <li><code>|</code> (Bitwise OR).</li>
+                    <li><code>^</code> (Bitwise XOR).</li>
+                    <li><code>~</code> (Bitwise NOT).</li>
+                    <li><code><<</code> (Left Shift): Desloca os bits para a esquerda, multiplicando o número por 2 a
+                        cada passo.</li>
+                </ul>
+            </section>
+
+            <div style="margin-top: 5rem; display: flex; justify-content: space-between; align-items: center;">
+                <a href="3-strings.html" class="back-btn">← Lição Anterior</a>
+                <a href="5-controle-fluxo.html" class="lesson-card" style="padding: 1rem 2rem; margin: 0;">
+                    Próxima Lição: Controle de Fluxo →
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <script src="../../main.js"></script>
+    <script>
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            const yOffset = -100;
+            const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+
+            let current = '';
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            const windowHeight = window.innerHeight;
+            const bodyHeight = document.documentElement.scrollHeight;
+
+            if (scrollPos + windowHeight >= bodyHeight - 50) {
+                current = sections[sections.length - 1].getAttribute('id');
+            } else {
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPos >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+            }
+
+            sidebarItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('onclick').includes(`'${current}'`)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

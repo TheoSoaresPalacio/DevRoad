@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Fluxo | The DevRoad</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="topic-page">
+    <aside class="topic-sidebar">
+        <a href="index.html" class="back-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Voltar ao Início
+        </a>
+        <h2>Neste capítulo</h2>
+        <div class="sidebar-item active" onclick="scrollToSection('decisao')">Tomada de Decisão</div>
+        <div class="sidebar-item" onclick="scrollToSection('elseif')">O Encadeamento Else-If</div>
+        <div class="sidebar-item" onclick="scrollToSection('switch')">O Switch Case</div>
+        <div class="sidebar-item" onclick="scrollToSection('loops')">Estruturas de Repetição</div>
+        <div class="sidebar-item" onclick="scrollToSection('foreach')">O For-Each Moderno</div>
+        <div class="sidebar-item" onclick="scrollToSection('keywords')">Break e Continue</div>
+    </aside>
+
+    <main class="topic-main">
+        <article class="lesson-content">
+            <section id="decisao">
+                <h1>Controle de Fluxo</h1>
+                <p>Um programa de computador não roda apenas em linha reta. Ele precisa desviar caminhos e repetir
+                    tarefas. O controle de fluxo é o que dá "vida" e lógica ao software.</p>
+
+                <h2>Tomada de Decisão (If / Else)</h2>
+                <div class="code-block">
+                    <pre><code>if (condição_booleana) {
+    // Código se for true
+} else {
+    // Código se for false
+}</code></pre>
+                </div>
+
+                <h3>Como Fazer (Passo a Passo)</h3>
+                <ol>
+                    <li><strong>Declare a Condição:</strong> Use uma expressão que resulte em <code>true</code> ou
+                        <code>false</code> dentro dos parênteses.
+                    </li>
+                    <li><strong>Abra as Chaves:</strong> Tudo o que estiver dentro de <code>{ }</code> após o
+                        <code>if</code> só roda se a condição for verdade.
+                    </li>
+                    <li><strong>Opcional (Else):</strong> Use o <code>else</code> para definir o que o programa deve
+                        fazer caso a condição seja mentira.</li>
+                </ol>
+
+                <h3>Observações e Perigos</h3>
+                <ul>
+                    <li><strong>Tipos Suportados:</strong> Em Java, o <code>if</code> aceita APENAS o tipo
+                        <code>boolean</code>. Diferente de linguagens como C ou JavaScript, o número <code>1</code> não
+                        é considerado <code>true</code>.
+                    </li>
+                    <li><strong>A Armadilha do Ponto e Vírgula:</strong> Cuidado para não colocar um <code>;</code> logo
+                        após o if: <code>if (x > 0);</code>. Isso cria uma instrução vazia e o bloco abaixo rodará
+                        sempre!</li>
+                    <li><strong>Brackets Obrigatórios:</strong> Embora o Java permita omitir as chaves <code>{ }</code>
+                        para uma única linha, é uma **boa prática** sempre usá-las para evitar erros futuros ao
+                        adicionar mais código.</li>
+                </ul>
+            </section>
+
+            <section id="elseif">
+                <h2>O Encadeamento (Else If)</h2>
+                <p>E se você tiver mais de duas opções? Para não criar uma bagunça de <code>if</code> dentro de outros,
+                    o Java permite o <code>else if</code>.</p>
+                <div class="callout">
+                    <h4>Múltiplas Condições</h4>
+                    <p>Ele verifica a primeira condição. Se for falsa, pula para a próxima. O processo para assim que
+                        ele encontra a primeira verdade.</p>
+                    <div class="code-block">
+                        <pre><code>double nota = 8.5;
+
+if (nota >= 9.0) {
+    System.out.println("Excelente!");
+} else if (nota >= 7.0) {
+    System.out.println("Bom trabalho!");
+} else if (nota >= 5.0) {
+    System.out.println("Recuperação.");
+} else {
+    System.out.println("Reprovado.");
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="switch">
+                <h2>O Switch Case</h2>
+                <p>O <code>switch</code> é ideal para testar uma única variável contra múltiplos valores constantes.</p>
+
+                <div class="code-block">
+                    <pre><code>switch (variavel) {
+    case valor1: 
+        // Código
+        break;
+    default:
+        // Caso nenhum bata
+}</code></pre>
+                </div>
+
+                <h3>Fórmula de Implementação</h3>
+                <p>Para criar um switch de sucesso:</p>
+                <ol>
+                    <li>Passe a variável a ser testada nos parênteses do <code>switch</code>.</li>
+                    <li>Para cada valor possível, crie um <code>case valor:</code>.</li>
+                    <li>**Obrigatório:** Termine cada case com um <code>break;</code> para não executar os próximos por
+                        engano.</li>
+                    <li>Sempre inclua um <code>default:</code> para lidar com valores inesperados.</li>
+                </ol>
+
+                <h3>Tipos de Dados Suportados</h3>
+                <p>O <code>switch</code> tradicional não aceita qualquer coisa. Ele funciona com:</p>
+                <ul>
+                    <li>Primitivos: <code>byte</code>, <code>short</code>, <code>char</code> e <code>int</code>.</li>
+                    <li>Classes Wrapper: <code>Byte</code>, <code>Short</code>, <code>Character</code> e
+                        <code>Integer</code>.
+                    </li>
+                    <li><code>String</code> (desde o Java 7) e <code>Enums</code>.</li>
+                </ul>
+
+                <div class="callout" style="border-color: #ef4444; background: rgba(239, 68, 68, 0.05);">
+                    <h4>⚠️ O Perigo do "Fall-through"</h4>
+                    <p>Se você esquecer o comando <code>break</code>, o Java continuará executando todos os cases abaixo
+                        dele, mesmo que não combinem! Isso é uma fonte comum de bugs difíceis de encontrar.</p>
+                </div>
+
+                <h3>Switch Expressions e <code>yield</code></h3>
+                <p>Nas versões mais recentes do Java (Java 14+), o <code>switch</code> evoluiu para ser usado também
+                    como uma **expressão** (algo que produz um resultado que pode ser guardado em uma variável).</p>
+
+                <div class="callout" style="border-color: #8b5cf6; background: rgba(139, 92, 246, 0.05);">
+                    <h4>O que é o <code>yield</code>?</h4>
+                    <p>Pense no <code>yield</code> como um "return exclusivo para o switch". Quando você usa as chaves
+                        <code>{ }</code> em um case do switch moderno, o Java espera que você "produza" um valor de
+                        volta para a expressão.
+                    </p>
+                    <p><strong>Por que não usar <code>return</code>?</strong> Porque o <code>return</code> fecharia o
+                        método inteiro onde o switch está! O <code>yield</code> apenas encerra o bloco do switch e
+                        entrega o valor para a variável.</p>
+                </div>
+
+                <div class="code-block">
+                    <pre><code>String categoriaIdade = switch (idade) {
+    case 0, 1, 2 -> "Bebê";
+    case 13, 14, 15, 16, 17 -> {
+        System.out.println("Verificando permissão dos pais...");
+        // Como temos lógica aqui, usamos chaves e yield
+        yield "Adolescente";
+    }
+    default -> "Adulto";
+};</code></pre>
+                </div>
+            </section>
+
+            <section id="loops">
+                <h2>Estruturas de Repetição (Loops)</h2>
+
+                <h3>1. While</h3>
+                <p><strong>Sintaxe:</strong> <code>while (condição) { ... }</code></p>
+                <div class="callout" style="border-color: #f59e0b; background: rgba(245, 158, 11, 0.05);">
+                    <h4>Cuidado: Loop Infinito</h4>
+                    <p>Sempre garanta que a condição do <code>while</code> eventualmente se torne falsa. Se você
+                        esquecer de incrementar um contador, seu programa travará consumindo 100% da CPU.</p>
+                </div>
+                <p><strong>Como funciona:</strong> O Java olha para a condição. Se for verdade, ele entra no loop.
+                    Quando chega no final das chaves, ele volta pro topo e olha a condição de novo. Ele só para quando a
+                    condição virar mentira.</p>
+
+                <h3>2. Do-While</h3>
+                <p><strong>Sintaxe:</strong> <code>do { ... } while (condição);</code></p>
+                <p><strong>Como funciona:</strong> Ele executa o código primeiro e só depois pergunta se deve continuar.
+                    É por isso que ele sempre roda pelo menos uma vez.</p>
+                <p>Útil para menus onde você quer que as opções apareçam antes de perguntar ao usuário se ele quer sair.
+                </p>
+
+                <h3>3. For Tradicional</h3>
+                <p><strong>Sintaxe:</strong> <code>for (inicialização; condição; incremento) { ... }</code></p>
+                <div class="code-block">
+                    <pre><code>for (int i = 0; i < 10; i++) { ... }</code></pre>
+                </div>
+                <p><strong>O Passo a Passo do For:</strong></p>
+                <ol>
+                    <li><strong>Inicialização:</strong> Cria uma variável de controle (ex: <code>int i = 0</code>). Só
+                        roda uma vez no começo.</li>
+                    <li><strong>Condição:</strong> Verifica se o loop deve continuar (ex: <code>i < 10</code>).</li>
+                    <li><strong>Incremento:</strong> Atualiza a variável após cada volta (ex: <code>i++</code>).</li>
+                </ol>
+                <h3>Problema Comum: Off-by-one</h3>
+                <p>Muitos iniciantes erram o limite do loop, usando <code><=</code> em vez de <code><</code> ao
+                    percorrer arrays, causando o erro <code>ArrayIndexOutOfBoundsException</code>.</p>
+            </section>
+
+            <section id="foreach">
+                <h2>For-Each: Elegância e Simplicidade</h2>
+                <p>Para que serve? O <code>for-each</code> (também chamado de "Enhanced For") foi criado para
+                    **percorrer coleções** (como Arrays ou Listas) do início ao fim de forma segura e rápida.</p>
+
+                <h3>Como Fazer (A Estrutura)</h3>
+                <div class="code-block">
+                    <pre><code>for (Tipo apelido : colecao) {
+    // Use o "apelido" para acessar o item atual
+}</code></pre>
+                </div>
+
+                <h3>Ensinando o Passo a Passo</h3>
+                <ol>
+                    <li><strong>Tipo:</strong> Deve ser o mesmo tipo dos elementos que estão dentro da coleção (ex: se é
+                        uma lista de nomes, o tipo será <code>String</code>).</li>
+                    <li><strong>Apelido:</strong> Um nome de variável que você inventa para representar o item que o
+                        loop está segurando naquele exato momento.</li>
+                    <li><strong>Lógica Interna:</strong> O Java vai repetir o código dentro das chaves automaticamente
+                        para cada item da lista, sem você precisar se preocupar com números de índice (0, 1, 2...).</li>
+                </ol>
+
+                <h3>Exemplo Real</h3>
+                <div class="code-block">
+                    <pre><code>String[] frutas = {"Maçã", "Banana", "Uva"};
+
+for (String fruta : frutas) {
+    System.out.println("Eu gosto de: " + fruta);
+}</code></pre>
+                </div>
+
+                <h3>Vantagens e Limitações</h3>
+                <ul>
+                    <li><strong>Vantagem:</strong> Impossível de causar um erro de "índice fora dos limites". Código
+                        muito mais "limpo" (Clean Code).</li>
+                    <li><strong>Limitação 1:</strong> Você não tem acesso ao índice atual (não sabe se é o primeiro ou o
+                        último).</li>
+                    <li><strong>Limitação 2:</strong> É **unidirecional** (só vai para frente) e você não pode remover
+                        itens da lista durante o loop.</li>
+                </ul>
+
+                <div class="callout" style="border-color: #ef4444; background: rgba(239, 68, 68, 0.05);">
+                    <h4>⚠️ Perigo: NullPointerException</h4>
+                    <p>Se você tentar rodar um for-each em uma lista que é <code>null</code>, o Java lançará um erro
+                        fatal. Sempre verifique se a coleção existe antes de iterar.</p>
+                </div>
+            </section>
+
+            <section id="keywords">
+                <h2>Palavras-chave: <code>break</code> e <code>continue</code></h2>
+                <p>Às vezes você precisa interromper um loop antes da hora ou pular uma repetição específica.</p>
+                <ul>
+                    <li><strong><code>break</code>:</strong> Sai completamente do loop (ou switch) na hora.</li>
+                    <li><strong><code>continue</code>:</strong> Pula o código restante da repetição atual e vai direto
+                        para a próxima verificação de condição.</li>
+                </ul>
+                <div class="code-block">
+                    <pre><code>for (int i = 1; i <= 10; i++) {
+    if (i == 5) continue; // Pula o número 5
+    if (i == 8) break;    // Para o loop no 8
+    System.out.println(i);
+}</code></pre>
+                </div>
+            </section>
+
+            <div style="margin-top: 5rem; display: flex; justify-content: space-between; align-items: center;">
+                <a href="4-operadores.html" class="back-btn">← Lição Anterior</a>
+                <a href="6-boas-praticas.html" class="lesson-card" style="padding: 1rem 2rem; margin: 0;">
+                    Próxima Lição: Boas Práticas →
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <script src="../../main.js"></script>
+    <script>
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            const yOffset = -100;
+            const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+
+            let current = '';
+
+            // Se chegarmos ao fim da página, forçamos o destaque do último item
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            const windowHeight = window.innerHeight;
+            const bodyHeight = document.documentElement.scrollHeight;
+
+            if (scrollPos + windowHeight >= bodyHeight - 50) {
+                current = sections[sections.length - 1].getAttribute('id');
+            } else {
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPos >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+            }
+
+            sidebarItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('onclick').includes(`'${current}'`)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

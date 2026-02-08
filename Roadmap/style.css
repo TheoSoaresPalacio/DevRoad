@@ -1,0 +1,698 @@
+:root {
+    --bg-color: #0d0d12;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --primary: #6366f1;
+    --secondary: #a855f7;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-java: #f89820;
+    --accent-english: #3b82f6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Outfit', sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: rgba(13, 13, 18, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+#hero {
+    text-align: center;
+    padding: 6rem 5% 4rem;
+}
+
+#hero h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#hero p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.roadmap-section {
+    padding: 4rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+    padding: 0 5%;
+    animation: fadeInDown 0.8s ease-out both;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 1.25rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.header-icon.java {
+    color: var(--accent-java);
+    border-color: rgba(248, 152, 32, 0.2);
+}
+
+.header-icon.java:hover {
+    box-shadow: 0 0 20px rgba(248, 152, 32, 0.2);
+    transform: translateY(-2px);
+}
+
+.header-icon.english {
+    color: var(--accent-english);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.header-icon.english:hover {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+}
+
+.header-content h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section-desc {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 500px;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2rem 1rem;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.roadmap-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding: 4rem 0;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Central line */
+.roadmap-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom,
+            transparent,
+            var(--primary) 15%,
+            var(--secondary) 85%,
+            transparent);
+    transform: translateX(-50%);
+    opacity: 0.3;
+}
+
+/* Glassmorphism & Animations */
+.roadmap-node {
+    position: relative;
+    width: 45%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(12px);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: fadeIn 0.6s ease-out both;
+    z-index: 1;
+}
+
+/* Zig-zag alignment */
+.roadmap-node:nth-child(odd) {
+    align-self: flex-start;
+}
+
+.roadmap-node:nth-child(even) {
+    align-self: flex-end;
+}
+
+/* Connector point */
+.roadmap-node::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    background: var(--bg-color);
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.roadmap-node:nth-child(odd)::after {
+    right: -calc(11.1% + 8px);
+    /* Adjust based on container width */
+}
+
+.roadmap-node:nth-child(even)::after {
+    left: -calc(11.1% + 8px);
+}
+
+/* Fine-tuning positions for the dots on the center line */
+@media (min-width: 769px) {
+    .roadmap-node:nth-child(odd)::after {
+        right: -11.1%;
+        right: calc(-11.1% - 8px);
+    }
+
+    /* Let's simplify the dot placement: center of the gap */
+    .roadmap-node:nth-child(odd)::after {
+        right: -13.5%;
+    }
+
+    .roadmap-node:nth-child(even)::after {
+        left: -13.5%;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.roadmap-node:hover {
+    background: rgba(255, 255, 255, 0.07);
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+.roadmap-node:hover::after {
+    background: var(--primary);
+    transform: translateY(-50%) scale(1.3);
+    box-shadow: 0 0 15px var(--primary);
+}
+
+/* Staggered animation for nodes */
+.roadmap-node:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.roadmap-node:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.roadmap-node:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.roadmap-node:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.roadmap-node:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.roadmap-node:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.roadmap-node:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .roadmap-container::before {
+        left: 20px;
+    }
+
+    .roadmap-node {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+        align-self: flex-start !important;
+    }
+
+    .roadmap-node::after {
+        left: -48px !important;
+        right: auto !important;
+    }
+}
+
+/* Scroll progress indicator (simple) */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: var(--primary);
+    width: 0%;
+    transition: width 0.1s;
+}
+
+/* Custom colors for Java */
+#back-end .badge,
+#java-roadmap .roadmap-node::after {
+    border-color: var(--accent-java);
+}
+
+#java-roadmap .roadmap-node:hover::after {
+    background: var(--accent-java);
+    box-shadow: 0 0 15px var(--accent-java);
+}
+
+#java-roadmap .roadmap-node:hover {
+    border-color: var(--accent-java);
+}
+
+#back-end .badge,
+#java-roadmap .badge {
+    color: var(--accent-java);
+}
+
+/* Custom colors for English */
+#ingles .badge,
+#english-roadmap .roadmap-node::after {
+    border-color: var(--accent-english);
+}
+
+#english-roadmap .roadmap-node:hover::after {
+    background: var(--accent-english);
+    box-shadow: 0 0 15px var(--accent-english);
+}
+
+#english-roadmap .roadmap-node:hover {
+    border-color: var(--accent-english);
+}
+
+#ingles .badge,
+#english-roadmap .badge {
+    color: var(--accent-english);
+}
+
+/* Cursor and state feedback */
+.roadmap-node {
+    cursor: pointer !important;
+}
+
+nav a,
+.logo,
+.sidebar-item,
+.close-btn,
+.back-btn {
+    cursor: pointer;
+}
+
+/* Topic Page Layout */
+.topic-page {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: 100vh;
+}
+
+.topic-sidebar {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid var(--border-color);
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.topic-sidebar h2 {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: var(--primary);
+}
+
+.topic-main {
+    padding: 4rem 10%;
+    max-width: 1000px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 3rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.back-btn:hover {
+    color: var(--primary);
+}
+
+.lesson-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--text-main), var(--primary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.lesson-content h2 {
+    font-size: 2.2rem;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.lesson-content h3 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.lesson-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #cbd5e1;
+    margin-bottom: 1.5rem;
+}
+
+/* Callouts for Deep Dives */
+.callout {
+    background: rgba(99, 102, 241, 0.1);
+    border-left: 4px solid var(--primary);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+}
+
+.callout h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 13, 18, 0.9);
+    backdrop-filter: blur(8px);
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    margin: 5vh auto;
+    padding: 0;
+    /* Changed to 0 for modular layout */
+    width: 95%;
+    max-width: 1100px;
+    border-radius: 1.5rem;
+    position: relative;
+    max-height: 85vh;
+    overflow: hidden;
+    /* Changed to hidden */
+    display: flex;
+    /* Added for sidebar */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Modal Sidebar */
+.modal-sidebar {
+    width: 250px;
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid var(--border-color);
+    padding: 2rem 1rem;
+    overflow-y: auto;
+}
+
+.sidebar-item {
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+}
+
+.sidebar-item.active {
+    background: var(--primary);
+    color: white;
+}
+
+/* Modal Main Content */
+.modal-main {
+    flex: 1;
+    padding: 3rem;
+    overflow-y: auto;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 10;
+}
+
+/* Cursor and state feedback */
+.roadmap-node {
+    cursor: pointer !important;
+}
+
+nav a,
+.logo,
+.sidebar-item,
+.close-btn {
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: var(--primary);
+}
+
+.modal-body h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.modal-body h3 {
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    /* Adjusted from 1rem */
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.modal-body p {
+    margin-bottom: 1.2rem;
+    color: #cbd5e1;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.modal-body ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.modal-body li {
+    margin-bottom: 0.5rem;
+    color: #cbd5e1;
+}
+
+/* Typography & Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+th {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: #cbd5e1;
+}
+
+code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    color: var(--secondary);
+    font-size: 0.9em;
+}
+
+pre {
+    background: #1e1e2e;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
+    color: #cdd6f4;
+    font-size: 0.95em;
+}

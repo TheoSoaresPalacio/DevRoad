@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boas Práticas e Convenções | The DevRoad</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="topic-page">
+    <aside class="topic-sidebar">
+        <a href="index.html" class="back-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Voltar ao Início
+        </a>
+        <h2>Neste capítulo</h2>
+        <div class="sidebar-item active" onclick="scrollToSection('naming')">Convenções de Nomes</div>
+        <div class="sidebar-item" onclick="scrollToSection('magic')">Números Mágicos</div>
+        <div class="sidebar-item" onclick="scrollToSection('comentarios')">Comentários e Clean Code</div>
+    </aside>
+
+    <main class="topic-main">
+        <article class="lesson-content">
+            <section id="naming">
+                <h1>Boas Práticas e Convenções</h1>
+                <p>O Java é uma linguagem verbosa e elegante, mas para que ela continue assim, a comunidade (liderada
+                    pela Oracle) criou padrões que todos os desenvolvedores profissionais seguem.</p>
+
+                <h2>Nomes (Naming Conventions)</h2>
+                <ul>
+                    <li><strong>PascalCase:</strong> Usado para nomes de **Classes**. Começa com letra maiúscula (ex:
+                        <code>UsuarioService</code>).
+                    </li>
+                    <li><strong>camelCase:</strong> Usado para **Métodos e Variáveis**. A primeira palavra é minúscula,
+                        as outras começam com maiúscula (ex: <code>calcularDescontoVenda</code>).</li>
+                    <li><strong>SNAKE_CASE (MAIÚSCULO):</strong> Usado para **Constantes**. Tudo em maiúsculo separado
+                        por underline (ex: <code>VALOR_MAXIMO_PAGAMENTO</code>).</li>
+                </ul>
+            </section>
+
+            <section id="magic">
+                <h2>Números Mágicos: O Inimigo Silencioso</h2>
+                <p>Nunca coloque números "soltos" no seu código se eles significarem algo especial.</p>
+                <div class="callout" style="background: rgba(239, 68, 68, 0.05); border-color: #ef4444;">
+                    <h4>O Jeito Errado</h4>
+                    <p><code>if (salario < 1320.00) { ... }</code> (O que é 1320? O salário mínimo de qual ano?)</p>
+                    <h4>O Jeito Certo</h4>
+                    <p><code>final double SALARIO_MINIMO_2024 = 1320.00;</code> <br>
+                        <code>if (salario < SALARIO_MINIMO_2024) { ... }</code>
+                    </p>
+                </div>
+            </section>
+
+            <section id="comentarios">
+                <h2>Comentários e o Código "Auto-Explicativo"</h2>
+                <p>Um código bom deve ser como uma piada: se você tiver que explicar, é porque ele não foi bem feito.
+                </p>
+                <p>Use comentários para explicar o **PORQUÊ** de uma decisão complexa, e não o **O QUE** o código está
+                    fazendo. O nome da sua variável já deve dizer o que ela faz.</p>
+
+                <div class="callout">
+                    <h4>Regra de Ouro</h4>
+                    <p>Prefira gastar 10 segundos escolhendo um nome de variável perfeito do que gastar 1 minuto
+                        escrevendo um comentário explicando uma variável com nome ruim.</p>
+                </div>
+            </section>
+
+            <div style="margin-top: 5rem; text-align: center;">
+                <h2>Parabéns! 🎉</h2>
+                <p>Você concluiu o módulo de Fundamentos do Java. Agora você está pronto para o próximo desafio:
+                    Programação Orientada a Objetos.</p>
+                <a href="../../index.html" class="lesson-card"
+                    style="padding: 1rem 2rem; margin-top: 2rem; text-decoration: none; display: inline-block;">
+                    Voltar ao Roadmap Principal
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <script src="../../main.js"></script>
+    <script>
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            const yOffset = -100;
+            const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+
+            let current = '';
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            const windowHeight = window.innerHeight;
+            const bodyHeight = document.documentElement.scrollHeight;
+
+            if (scrollPos + windowHeight >= bodyHeight - 50) {
+                current = sections[sections.length - 1].getAttribute('id');
+            } else {
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPos >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+            }
+
+            sidebarItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('onclick').includes(`'${current}'`)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

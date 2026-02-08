@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variáveis e Primitivos | The DevRoad</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="topic-page">
+    <aside class="topic-sidebar">
+        <a href="index.html" class="back-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Voltar ao Início
+        </a>
+        <h2>Neste capítulo</h2>
+        <div class="sidebar-item active" onclick="scrollToSection('variaveis')">O que são Variáveis?</div>
+        <div class="sidebar-item" onclick="scrollToSection('campos-locais')">Campos vs Locais</div>
+        <div class="sidebar-item" onclick="scrollToSection('primitivos')">Os 8 Primitivos</div>
+        <div class="sidebar-item" onclick="scrollToSection('bits-bytes')">Bits e a Memória</div>
+        <div class="sidebar-item" onclick="scrollToSection('ieee754')">Decimais e IEEE 754</div>
+        <div class="sidebar-item" onclick="scrollToSection('casting')">Casting de Tipos</div>
+    </aside>
+
+    <main class="topic-main">
+        <article class="lesson-content">
+            <section id="variaveis">
+                <h1>Variáveis e Tipos Primitivos</h1>
+                <p>Na programação, nada existe "no ar". Tudo o que você processa precisa estar guardado em algum lugar
+                    da memória do computador. As **variáveis** são as etiquetas que damos para esses espaços na memória.
+                </p>
+
+                <h3>Declaração e Inicialização</h3>
+                <p>Em Java, você deve SEMPRE dizer ao computador qual o tipo de dado que aquela variável vai guardar.
+                    Isso é o que chamamos de **Tipagem Estática**.</p>
+                <div class="code-block">
+                    <pre><code>int idade = 25; 
+// [Tipo] [Nome] = [Valor];</code></pre>
+                </div>
+                <ul>
+                    <li><strong>Declaração:</strong> <code>int idade;</code> (Reserva o espaço).</li>
+                    <li><strong>Inicialização:</strong> <code>idade = 25;</code> (Coloca o conteúdo).</li>
+                </ul>
+            </section>
+
+            <section id="campos-locais">
+                <h2>Campos vs Variáveis Locais</h2>
+                <p>A localização de onde você declara uma variável no código muda drasticamente as regras do jogo.</p>
+
+                <h3>1. Variáveis Locais</h3>
+                <p>São as que vivem dentro de um <strong>método</strong>. Elas são temporárias e rápidas.</p>
+                <div class="callout" style="border-color: #ef4444; background: rgba(239, 68, 68, 0.05);">
+                    <h4>⚠️ Regra de Ouro</h4>
+                    <p>Variáveis locais **NÃO** recebem valor padrão. Se você declarar <code>int x;</code> dentro de um
+                        método e tentar usá-lo, o Java vai dar um erro de compilação na hora.</p>
+                </div>
+
+                <h3>2. Campos (Fields / Instância)</h3>
+                <p>São variáveis declaradas dentro da <strong>classe</strong>, mas fora de qualquer método. Elas definem
+                    o "estado" de um objeto.</p>
+                <div class="callout" style="border-color: #10b981; background: rgba(16, 185, 129, 0.05);">
+                    <h4>Valores Padrão (Default Values)</h4>
+                    <p>Diferente das locais, os <strong>campos</strong> recebem um valor padrão automático se você não
+                        inicializá-los:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Valor Padrão</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>byte, short, int, long</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>float, double</td>
+                                <td>0.0</td>
+                            </tr>
+                            <tr>
+                                <td>char</td>
+                                <td>'\u0000' (nulo)</td>
+                            </tr>
+                            <tr>
+                                <td>boolean</td>
+                                <td>false</td>
+                            </tr>
+                            <tr>
+                                <td>Objetos (String, etc)</td>
+                                <td>null</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="primitivos">
+                <h2>Os 8 Primitivos do Java</h2>
+                <p>Existem 8 tipos de dados "básicos" que não são objetos. Eles são leves e rápidos porque guardam o
+                    valor diretamente na memória <strong>Stack</strong>.</p>
+
+                <h3>1. Inteiros (Números Inteiros)</h3>
+                <ul>
+                    <li><strong>byte (8 bits):</strong> Range de -128 a 127. Muito usado para fluxos de arquivos
+                        binários.</li>
+                    <li><strong>short (16 bits):</strong> Range de -32.768 a 32.767. Raramente usado hoje em dia.</li>
+                    <li><strong>int (32 bits):</strong> O padrão para números inteiros. Vai de -2 bilhões até +2
+                        bilhões.</li>
+                    <li><strong>long (64 bits):</strong> Para números astronômicos. Ao declarar, use o sufixo 'L':
+                        <code>long pop = 8000000000L;</code>
+                    </li>
+                </ul>
+
+                <h3>2. Decimais (Pontos Flutuantes)</h3>
+                <ul>
+                    <li><strong>float (32 bits):</strong> Precisão de 7 casas decimais. Use o sufixo 'f':
+                        <code>float preco = 10.50f;</code>
+                    </li>
+                    <li><strong>double (64 bits):</strong> O padrão para decimais. Precisão de 15 casas.</li>
+                </ul>
+
+                <h3>3. Caractere</h3>
+                <ul>
+                    <li><strong>char (16 bits):</strong> Guarda um único caractere Unicode. Usa aspas simples:
+                        <code>char letra = 'A';</code>. Por trás das cenas, ele guarda o número da tabela Unicode
+                        correspondente.
+                    </li>
+                </ul>
+
+                <h3>4. Lógico</h3>
+                <ul>
+                    <li><strong>boolean:</strong> Representa apenas <code>true</code> (verdadeiro) ou <code>false</code>
+                        (falso). É muito usado em estruturas condicionais como <code>if/else</code></li>
+                </ul>
+            </section>
+
+            <section id="bits-bytes">
+                <h2>O Custo de Cada Escolha</h2>
+                <p>Por que não usar <code>long</code> para tudo? Por causa da memória.</p>
+                <div class="callout">
+                    <h4>Pense em Caixas</h4>
+                    <p>Usar um <code>long</code> para guardar o número de filhos de uma pessoa é como usar um container
+                        de navio para guardar uma caneta. Você está desperdiçando espaço que poderia ser usado por
+                        outros programas.</p>
+                </div>
+            </section>
+
+            <section id="ieee754">
+                <h2>O Mistério do Decimal (IEEE 754)</h2>
+                <p>Já tentou somar <code>0.1 + 0.2</code> e o resultado deu <code>0.30000000000000004</code>? Isso não é
+                    um bug do Java, é matemática binária!</p>
+                <p>Computadores guardam números em base 2 (0 e 1). Alguns números decimais (base 10) são impossíveis de
+                    representar perfeitamente em base 2, assim como 1/3 é impossível de representar perfeitamente em
+                    base 10 (0.3333...).</p>
+                <div class="callout" style="border-color: #f59e0b; background: rgba(245, 158, 11, 0.05);">
+                    <h4>Dica de Ouro</h4>
+                    <p>Se você estiver trabalhando com sistemas de pagamento, preços ou bancos, **NUNCA** use float ou
+                        double. Use a classe <code>BigDecimal</code> ou guarde tudo em centavos como <code>long</code>.
+                    </p>
+                </div>
+            </section>
+
+            <section id="casting">
+                <h2>Casting (Conversão de Tipos)</h2>
+                <p>O Java é uma linguagem fortemente tipada. Isso significa que você não pode simplesmente jogar um
+                    balde de água (um <code>double</code>) dentro de um copo (um <code>int</code>) sem que o Java
+                    reclame. Existem dois tipos de conversão:</p>
+
+                <h3>1. Widening Casting (Implícito)</h3>
+                <p>Acontece automaticamente quando você passa um tipo menor para um maior. É seguro porque não há risco
+                    de perder dados.</p>
+                <div class="code-block">
+                    <pre><code>int meuInt = 9;
+double meuDouble = meuInt; // Automático: int -> double</code></pre>
+                </div>
+                <p><strong>Ordem:</strong> <code>byte</code> &rarr; <code>short</code> &rarr; <code>char</code> &rarr;
+                    <code>int</code> &rarr; <code>long</code> &rarr; <code>float</code> &rarr; <code>double</code>
+                </p>
+
+                <h3>2. Narrowing Casting (Explícito)</h3>
+                <p>Acontece quando você quer colocar um tipo maior em um menor. Você precisa "forçar" o Java a aceitar
+                    isso usando parênteses. <strong>Atenção:</strong> Isso pode causar perda de informação!</p>
+                <div class="code-block">
+                    <pre><code>double meuDouble = 9.78d;
+int meuInt = (int) meuDouble; // Forçado: vira 9 (perde os decimais)</code></pre>
+                </div>
+
+                <div class="callout" style="border-color: #ef4444; background: rgba(239, 68, 68, 0.05);">
+                    <h4>⚠️ Perigo de Overflow</h4>
+                    <p>Se você tentar converter um <code>int</code> muito grande (ex: 1000) para um <code>byte</code>
+                        (que só vai até 127), o Java não vai dar erro, mas o valor vai "rodar" e virar um número
+                        totalmente diferente e imprevisível. Sempre verifique os limites antes de fazer um Narrowing
+                        Casting!</p>
+                </div>
+            </section>
+
+            <div style="margin-top: 5rem; display: flex; justify-content: space-between; align-items: center;">
+                <a href="1-introducao.html" class="back-btn">← Lição Anterior</a>
+                <a href="3-strings.html" class="lesson-card" style="padding: 1rem 2rem; margin: 0;">
+                    Próxima Lição: Strings →
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <script src="../../main.js"></script>
+    <script>
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            const yOffset = -100;
+            const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+
+            let current = '';
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            const windowHeight = window.innerHeight;
+            const bodyHeight = document.documentElement.scrollHeight;
+
+            if (scrollPos + windowHeight >= bodyHeight - 50) {
+                current = sections[sections.length - 1].getAttribute('id');
+            } else {
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPos >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+            }
+
+            sidebarItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('onclick').includes(`'${current}'`)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The DevRoad - Sua Jornada Tech</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">The <span>DevRoad</span></div>
+        <nav>
+            <a href="#back-end">Back-End</a>
+            <a href="#ingles">Inglês Profissional</a>
+        </nav>
+    </header>
+
+    <main id="app">
+        <section id="hero">
+            <h1>Sua Jornada de <span class="gradient-text">Aprendizado</span></h1>
+            <p>Siga o mapa e domine as tecnologias mais usadas no mercado.</p>
+        </section>
+
+        <section id="back-end" class="roadmap-section">
+            <div class="section-header">
+                <div class="header-icon java">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                        <line x1="6" y1="1" x2="6" y2="4" />
+                        <line x1="10" y1="1" x2="10" y2="4" />
+                        <line x1="14" y1="1" x2="14" y2="4" />
+                    </svg>
+                </div>
+                <div class="header-content">
+                    <h2>Back-End <span class="badge">Java</span></h2>
+                    <p class="section-desc">Domine a linguagem robusta de alta performance usada por grandes sistemas
+                        globais.</p>
+                </div>
+            </div>
+            <div class="roadmap-container" id="java-roadmap">
+                <!-- Roadmap content will be injected by JS or hardcoded -->
+            </div>
+        </section>
+
+        <section id="ingles" class="roadmap-section">
+            <div class="section-header">
+                <div class="header-icon english">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                </div>
+                <div class="header-content">
+                    <h2>Inglês <span class="badge">Profissional</span></h2>
+                    <p class="section-desc">Destaque-se no mercado global com comunicação técnica e fluidez para
+                        tecnologia.</p>
+                </div>
+            </div>
+            <div class="roadmap-container" id="english-roadmap">
+                <!-- Roadmap content will be injected by JS or hardcoded -->
+            </div>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

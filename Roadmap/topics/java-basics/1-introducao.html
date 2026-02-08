@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Ciclo de Vida do Java | The DevRoad</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="topic-page">
+    <aside class="topic-sidebar">
+        <a href="index.html" class="back-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Voltar ao Início
+        </a>
+        <h2>Conteúdo</h2>
+        <div class="sidebar-item active" onclick="scrollToSection('intro')">Introdução</div>
+        <div class="sidebar-item" onclick="scrollToSection('jdk-jre-jvm')">JDK vs JRE vs JVM</div>
+        <div class="sidebar-item" onclick="scrollToSection('compilacao')">O Processo de Compilação</div>
+        <div class="sidebar-item" onclick="scrollToSection('jit')">O Compilador JIT</div>
+    </aside>
+
+    <main class="topic-main">
+        <article class="lesson-content">
+            <section id="intro">
+                <h1>O Ciclo de Vida do Java</h1>
+                <p>Java não é apenas uma "língua" que você escreve; é uma plataforma inteira projetada para ser robusta
+                    e portável. Para entender por que o Java domina grandes sistemas, precisamos entender como ele nasce
+                    e como ele "vive" dentro do computador.</p>
+
+                <p>O lema principal do Java é <strong>"Write Once, Run Anywhere" (Escreva uma vez, rode em qualquer
+                        lugar)</strong>. Isso significa que um código escrito no Windows deve rodar perfeitamente em um
+                    servidor Linux ou em um Mac sem nenhuma alteração.</p>
+            </section>
+
+            <section id="jdk-jre-jvm">
+                <h2>A Trindade: JDK, JRE e JVM</h2>
+                <p>Para qualquer iniciante, essas siglas parecem sopa de letrinha, mas elas são níveis de "caixas" uma
+                    dentro da outra.</p>
+
+                <div class="callout">
+                    <h4>Pense como uma Cozinha</h4>
+                    <ul>
+                        <li><strong>JDK (Development Kit):</strong> É a cozinha completa. Tem as facas (compilador), as
+                            receitas (bibliotecas) e os chefes. Se você vai *cozinhar* (programar), você precisa do JDK.
+                        </li>
+                        <li><strong>JRE (Runtime Environment):</strong> É o prato pronto e a mesa posta. Tem tudo o que
+                            é necessário para quem quer apenas *comer* (rodar) o programa. O usuário final só precisa da
+                            JRE.</li>
+                        <li><strong>JVM (Virtual Machine):</strong> É o estômago. É a parte que realmente digere o
+                            código e transforma em energia (instruções para o processador).</li>
+                    </ul>
+                </div>
+
+                <h3>JVM: O Coração Portável</h3>
+                <p>A JVM é uma máquina virtual que atua como uma camada entre o seu código e o sistema operacional. É
+                    ela quem gerencia a memória, garante a segurança e faz a mágica da portabilidade acontecer.</p>
+            </section>
+
+            <section id="compilacao">
+                <h2>O Processo de Compilação</h2>
+                <p>Diferente de C++, onde o código vira um "binário" direto, no Java temos um degrau intermediário.</p>
+
+                <ol>
+                    <li><strong>Código Fonte (<code>.java</code>):</strong> O texto que você escreve.</li>
+                    <li><strong><code>javac</code> (Compilador):</strong> Quando você roda o comando <code>javac</code>,
+                        ele traduz seu texto para uma linguagem secreta chamada <strong>Bytecode</strong>.</li>
+                    <li><strong>Bytecode (<code>.class</code>):</strong> É um código que não é humano, mas também não é
+                        do computador. Ele é a "linguagem universal" da JVM.</li>
+                </ol>
+
+                <div class="callout" style="background: rgba(16, 185, 129, 0.1); border-color: #10b981;">
+                    <h4>Por que isso é bom?</h4>
+                    <p>Como o Bytecode é universal, você pode compilar seu código no seu notebook e enviar o arquivo
+                        <code>.class</code> para qualquer máquina do mundo. Se essa máquina tiver uma JVM, ela saberá
+                        ler esse bytecode.
+                    </p>
+                </div>
+            </section>
+
+            <section id="jit">
+                <h2>JIT: Just-In-Time Compiler</h2>
+                <p>Antigamente diziam que Java era lento. Isso mudou graças ao <strong>JIT</strong>.</p>
+                <p>A JVM começa interpretando o bytecode linha por linha. Porém, se ela percebe que uma parte do seu
+                    código (um "Hotspot") está rodando muitas vezes, o JIT entra em ação e compila aquela parte
+                    específica diretamente para <strong>linguagem de máquina nativa</strong> em tempo real.</p>
+                <p>Isso faz com que o Java aprenda a ser rápido enquanto o programa está rodando!</p>
+            </section>
+
+            <div style="margin-top: 5rem; display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="back-btn">Voltar ao Hub</a>
+                <a href="2-variaveis-primitivos.html" class="lesson-card" style="padding: 1rem 2rem; margin: 0;">
+                    Próxima Lição: Variáveis & Primitivos →
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <script src="../../main.js"></script>
+    <script>
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            const yOffset = -100;
+            const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+
+            let current = '';
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            const windowHeight = window.innerHeight;
+            const bodyHeight = document.documentElement.scrollHeight;
+
+            if (scrollPos + windowHeight >= bodyHeight - 50) {
+                current = sections[sections.length - 1].getAttribute('id');
+            } else {
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollPos >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+            }
+
+            sidebarItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('onclick').includes(`'${current}'`)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
